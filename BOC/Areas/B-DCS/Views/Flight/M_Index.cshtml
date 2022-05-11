@@ -1,0 +1,63 @@
+﻿@using DevExtreme.AspNet.Mvc
+@model BOC.Areas.B_DCS.Models.DCS_FlightInfor;
+@{
+    ViewData["Title"] = "M_Index";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+
+
+@using (Html.BeginForm("M_SearchList", "Flight", FormMethod.Post)) {
+    <div style="width:90%;
+                margin:auto;
+                background-color:white;padding-bottom:20px">
+
+    <div style="display:flex;width:100%;margin-top:100px">
+    <div style="flex:40%;background-color:white;text-align:center;padding-top:6px">Flight Date</div>
+    <div style="flex:60%;background-color:white;">
+  @(Html.DevExtreme().DateBoxFor(m=>m.FlightDate)
+                .Type(DateBoxType.Date).Placeholder("Date")
+                .Value(@ViewBag.FlightDate!=null?@ViewBag.FlightDate:string.Empty)
+            )
+            @*@if(ViewBag.FlightDate!=null){
+                @(Html.DevExtreme().DateBoxFor(m=>m.FlightDate)
+                .Type(DateBoxType.Date).Placeholder("Date")
+                .Value(@ViewBag.FlightDate)
+            )
+            @ViewBag.FlightDate
+            }
+            else
+            {
+                @(Html.DevExtreme().DateBoxFor(m=>m.FlightDate)
+                .Type(DateBoxType.Date).Placeholder("Date")
+                .Value(string.Empty)
+            )
+            }*@
+</div>
+    </div>
+
+     <div style="display:flex;width:100%;margin-top:20px">
+    <div style="flex:40%;background-color:white;text-align:center;padding-top:6px">Airport</div>
+    <div style="flex:60%;background-color:white">
+   <input type="text" id="Airports" name="Airports" class="form-control" placeholder ="Airport" value="@ViewBag.Airport" />
+</div>
+    </div>
+      <button type="submit" class="btn btn-danger" style="background-color:darkgreen;width:100px;margin-top:20px;margin-left:auto;margin-right:auto;display:block">Search</button>
+    </div>
+
+
+
+}
+<script>
+
+       $("#Airports").click(function() {
+           if( $("#FlightDate").val()!=null)
+           {
+    location.href = "/B-DCS/Flight/M_FlightList?FlightDate=8c11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a_" + $("#FlightDate").val()
+           }
+           else{
+               location.href = "/B-DCS/Flight/M_FlightList"
+           }
+  });
+ 
+</script>

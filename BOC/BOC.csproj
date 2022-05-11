@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\js\controlreport\Mcreatereport.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DeviceDetector.NET.NetCore" Version="3.9.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.3" />
+    <PackageReference Include="Nancy" Version="2.0.0" />
+    <PackageReference Include="Ninject" Version="3.3.4" />
+    <PackageReference Include="SSH.NET" Version="2020.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\B-DCS\Data\" />
+    <Folder Include="Areas\DarkSiteEmergency\Data\" />
+    <Folder Include="wwwroot\data\ControlReport\" />
+    <None Include="wwwroot\js\controlreport\Mcreatereport.js" />
+    <None Include="wwwroot\js\controlreport\createreport.js" />
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="21.2.5" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.2" />
+  </ItemGroup>
+</Project>

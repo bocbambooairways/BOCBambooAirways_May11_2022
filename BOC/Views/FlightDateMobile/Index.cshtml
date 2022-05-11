@@ -1,0 +1,222 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+@{
+    var date = @HttpContextAccessor.HttpContext.Session.GetString("Date");
+
+}
+
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+@using BOC.Models;
+@model List<Flight>;
+
+<style>
+    #boxtitle {
+        background-color: #64AF53;
+        width:110%;
+    }
+    #boxinfo{
+        border:solid 1px #e5e4e4;
+    }
+    body .container.body .right_col {
+        background: #F7F7F7;
+        height: auto !important;
+        overflow: auto; /*Đi kèm nếu muốn set height auto*/
+    }
+
+    
+
+</style>
+
+
+
+@if (Model != null)
+{
+<div class="container" style="height: auto;margin-top:100px;">
+    <div class="row" id="boxtitle">
+        <h1 style="color:#ffffff;text-align:center;">VN Time-@date.ToString() </h1>
+    </div>
+    
+    @foreach (var item in Model)
+    {
+           
+             var FltNo ="QH" +@item.FltNo.ToString();
+            
+
+            <div class="card text-dark bg-light mb-3" style="max-width: 96%;margin-left:10px;">
+                    <div class="card-header">
+                        <div class="row">
+                                <a href="/FlightDateMobile/Detail?FlightId=@item.FlightID.ToString()&FlightNo=@item.FltNo.ToString()&Routing=@item.Route.ToString()" style="background-color:@item.FltNo_Color.ToString();color:#0204fd;font-weight: bold;margin-left:30px;" class="FltNo"><p>@FltNo.ToString()/@date.ToString()/@item.Route.ToString()</p></a>
+                        </div>
+                         <div class="row">
+                            <div class="col">
+                                <b>Reg:</b><p style="background-color:@item.RegisterNo_Color.ToString()">@item.RegisterNo.ToString()</p>
+                            </div>
+                            <div class="col">
+                                <b>Arr:</b><p style="background-color:@item.DateTime_ATA_Color.ToString()">@item.DateTime_ATA.ToString()</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                                 @if (item.ETD.ToString() != "" && item.ATD.ToString() != ""){
+                                        <div class="col">
+                                                STD/ETD/ATD:
+                                            </div>
+                                            <div class="col">
+                                                <div class="row">
+                                                   <div style="background-color:@item.STD_Color.ToString();">@item.STD.ToString()</div>/
+                                                   <div style="background-color:@item.ETD_Color.ToString();">@item.ETD.ToString()</div>/
+                                                   <div style="background-color:@item.ATD_Color.ToString();">@item.ATD.ToString()</div>
+                                               </div>
+                                            </div>
+                              
+                                 }
+                                @if (item.ETD.ToString() == "")
+                                {
+                                     <div class="col">
+                                        STD/ATD:
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                               <div style="background-color:@item.STD_Color.ToString();">@item.STD.ToString()</div>/
+                                               <div style="background-color:@item.ATD_Color.ToString();">@item.ATD.ToString()</div>
+                                         </div>
+                                    </div>
+
+                                }
+                                @if (item.ATD.ToString() == "")
+                                {
+                                     <div class="col">
+                                        STD/ETD:
+                                    </div>
+                                     <div class="col">
+                                          <div class="row">
+                                               <div style="background-color:@item.STD_Color.ToString();">@item.STD.ToString()</div>/
+                                               <div style="background-color:@item.ETD_Color.ToString();">@item.ETD.ToString()</div>
+                                           </div>
+                                               
+                                     </div>
+
+                                }
+                        
+                        </div>
+                       <div class="row">
+                                @if (item.ETA.ToString() != "" && item.ATA.ToString() != "")
+                                {
+                                    <div class="col">
+                                        STA/ETA/ATA:
+                                    </div>
+                                     <div class="col">
+                                         <div class="row">
+                                               <div style="background-color:@item.STA_Color.ToString();">@item.STA.ToString()</div>/
+                                               <div style="background-color:@item.ETA_Color.ToString();">@item.ETA.ToString()</div>/
+                                               <div style="background-color:@item.ATA_Color.ToString();">@item.ATA.ToString()</div>
+                                          </div>
+                                     </div>
+                                }
+                                @if (item.ETA.ToString() == "")
+                                {
+                                    <div class="col">
+                                        STA/ATA:
+                                    </div>
+                                     <div class="col" style="display:inline-block;">
+                                           <div class="row">
+                                               <div style="background-color:@item.STA_Color.ToString();">@item.STA.ToString()</div>/
+                                               <div style="background-color:@item.ATA_Color.ToString();">@item.ATA.ToString()</div>
+                                           </div>
+                                     </div>
+                                }
+                                @if (item.ATA.ToString() == "")
+                                {
+                                    <div class="col">
+                                        STA/ETA:
+                                    </div>
+                                    <div class="col" style="display:inline-block;">
+                                          <div class="row">
+                                               <div style="background-color:@item.STA_Color.ToString();">@item.STA.ToString()</div>/
+                                               <div style="background-color:@item.ETA_Color.ToString();">@item.ETA.ToString()</div>
+                                           </div>
+                                     </div>
+                                }
+                         </div>
+                       
+
+                         <div class="row">
+                            @if (item.Gate.ToString() != "" && item.Belt_Dep.ToString() != "")
+                            {
+                                <div class="col">
+                                    Gate/Belt:
+                                </div>
+                                <div class="col" style="display:inline-block;">
+                                    <div class="row">
+
+                                        <div style="background-color:@item.Gate_Color.ToString()">@item.Gate.ToString()</div>/
+                                        <div style="background-color:@item.Belt_Dep_Color.ToString();">@item.Belt_Dep.ToString()</div>
+                                    </div>
+                                </div>
+                            }
+                            @if (item.Gate.ToString() == "")
+                            {
+                                <div class="col">
+                                    Belt:
+                                </div>
+                                <div class="col" style="display:inline-block;">
+                                    <div class="row">
+                                        <div style="background-color:@item.Belt_Dep_Color.ToString();">@item.Belt_Dep.ToString()</div>
+                                    </div>
+                                </div>
+                            }
+                             @if ( item.Belt_Dep.ToString() == "")
+                            {
+                                <div class="col">
+                                    Gate:
+                                </div>
+                                <div class="col" style="display:inline-block;">
+                                    <div class="row">
+
+                                        <div style="background-color:@item.Gate_Color.ToString()">@item.Gate.ToString()</div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                         <div class="row">
+                            <div class="col">
+                                D Close/TOff/TDown:
+                            </div>            
+                             <div class="col">
+                                 <div class="row">
+                                               <div style="background-color:@item.DoorClose_Color.ToString()">@item.DoorClose.ToString()</div>/
+                                               <div style="background-color:@item.TOff_Color.ToString();">@item.TOff.ToString()</div>/
+                                               <div style="background-color:@item.TDown_Color.ToString();">@item.TDown.ToString()</div>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+                  
+                   @* <div class="card-footer">
+                          <div class="row">
+                            <div class="col">
+                                <i style="font-size: small;">@item.UserUpdate.ToString()</i>
+                            </div>
+                            <div class="col">
+                                <i style="font-size: small;">@item.RecDate.ToString()</i>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+
+
+  
+    }
+</div>
+ }
+
+
+
+

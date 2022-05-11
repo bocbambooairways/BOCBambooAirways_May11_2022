@@ -1,0 +1,227 @@
+﻿
+@{
+    ViewData["Title"] = "FlightGet";
+    Layout = "~/Views/Shared/_DeskTop.cshtml";
+}
+@using DevExtreme.AspNet.Mvc
+@using BOC.Areas.ControlReport.Models;
+@model ControlReportModel;
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@{
+    var sessionName = new Byte[20];
+    bool nameOK = Context.Session.TryGetValue("Username", out sessionName);
+    var sessionToken = @HttpContextAccessor.HttpContext.Session.GetString("Token");
+
+
+
+}
+
+
+<style>
+   .glyphicon-calendar {
+    font-size: 15pt;
+}
+
+.input-group {
+    width: 180px;
+    margin-top: 30px;
+}
+ .dx-scrollable {
+   width: 100%
+    
+}
+.dx-button-content{
+    background-color:green;border-radius:8px!important
+}
+.dx-button-text{
+    color:white;/*border-radius:10px!important*/
+}
+.dx-button-content:hover{
+    background-color:darkgreen!important
+}
+.dx-header-row{
+        background-color:lightgreen;color:darkgreen
+    }
+
+
+</style>
+ <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css' media="screen" />
+
+@*    <link rel="stylesheet" href='~/css/controlreport/bootstrap.min.css' media="screen" />*@
+    <!-- Bootstrap DatePicker -->
+    <link rel="stylesheet" href="~/css/controlreport/bootstrap-datepicker.css" type="text/css" />
+
+<h3 style="text-align:center;"><b>Chào @HttpContextAccessor.HttpContext.Session.GetString("Username"), vui lòng chọn ngày thực hiện chuyến bay của bạn</b><br />
+
+    Hi @HttpContextAccessor.HttpContext.Session.GetString("Username"), please choose your flight date:</h3>
+
+  <form method="post"  enctype="multipart/form-data" novalidate="" id="frmFilter" asp-controller="ControlReport" asp-action="FlightGet">
+   <div class="row" style="text-align:center;margin-top:20px;"> 
+            <div class="form-group col-xs-4" style="margin-left: 400px;">
+                            <div class="input-group">
+                                @*<input id="txtfromDate" type="text" class="form-control date-input" readonly="readonly" style="margin-top:-60px;width:210px;"/>*@
+                                @Html.TextBoxFor(m => m.FromDate, new { @class="form-control date-input",id="txtfromDate",@readonly="readonly", @style="margin-top:-60px;width:210px;" })
+                                <label class="input-group-btn" for="txtfromDate">
+                                    <span class="btn btn-default" style="margin-top:-60px;">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </label>
+                            </div>
+                     
+            </div>
+             @Html.HiddenFor(model => model.FromDate)
+             <b style="margin-left:-55px;">-</b>
+             <div class="form-group col-xs-4" style="margin-left:-30px;">
+                            <div class="input-group">
+                                @*<input id="txttoDate" type="text" class="form-control date-input" readonly="readonly" style="margin-top:-60px;margin-left: -58px;width:210px;"/>*@
+                                 @Html.TextBoxFor(m => m.ToDate, new { @class="form-control date-input",id="txttoDate",@readonly="readonly", @style="margin-top:-60px;margin-left: -58px;width:210px" })
+                                <label class="input-group-btn" for="txttoDate">
+                                    <span class="btn btn-default" style="margin-top:-60px;">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </label>
+                            </div>
+                            
+            </div>
+            @Html.HiddenFor(model => model.ToDate)
+        </div>
+       <div style="margin-left:596px;margin-top: -16px;">
+           <input type="submit"  value="Tìm kiếm/ Search" class="btn btn-primary" />
+       </div>
+   </form>  
+   <br />
+@if (Model != null)
+{
+    @(Html.DevExtreme().TreeList<BOC.Areas.ControlReport.Models.FlightInfo>()
+    .ID("treeListContainer")
+    .DataSource(Model.DataInfo)
+    .KeyExpr("No")
+    .Paging(paging => paging.PageSize(5))
+    .ParentIdExpr("HeadID")
+    .FilterRow(filterRow => filterRow.Visible(true)).ShowBorders(true)
+    .Selection(s => s.Mode(SelectionMode.Single)).Paging(m=>m.PageSize(5)).Scrolling(scrolling => scrolling.ColumnRenderingMode(GridColumnRenderingMode.Virtual))
+    .Columns(column => {
+         column.AddFor(m => m.FltNo).Alignment(HorizontalAlignment.Center).HeaderCellTemplate(@<text>
+                <div> Action</div>
+            </text>).CellTemplate( @<text>
+        @(Html.DevExtreme().Button()
+
+                .Text("Create Report")
+                .OnClick("function () { onItemClick(data); }")
+               
+               
+        )
+    </text>).Width(200);
+
+        column.AddFor(m => m.No).Alignment(HorizontalAlignment.Left).Caption("No");
+        column.AddFor(m => m.FlightDate).Alignment(HorizontalAlignment.Left).Caption("FlightDate");
+        column.AddFor(m => m.RegisterNo).Alignment(HorizontalAlignment.Left).Caption("Reg");
+        column.AddFor(m => m.FltNo).Alignment(HorizontalAlignment.Left).Caption("Flt.No");
+        column.AddFor(m => m.Aircraft).Alignment(HorizontalAlignment.Left).Caption("Aircraft");
+        column.AddFor(m => m.FlightType).Alignment(HorizontalAlignment.Left).Caption("Type");
+        column.Add()
+            .Caption("Route")
+            .Width(100)
+            .CalculateCellValue(@<text>
+                            function(data) {
+                                return [data.Dep, data.Arr].join("/");
+                            }
+                        </text>);
+        column.AddFor(m => m.STD).Alignment(HorizontalAlignment.Left).Caption("STD");
+        column.Add()
+            .Caption("ETD/ETA")
+            .Width(100)
+            .CalculateCellValue(@<text>
+                            function(data) {
+                                return [data.ETD, data.ATD].join("/");
+                            }
+                        </text>);
+        column.AddFor(m => m.STA).Alignment(HorizontalAlignment.Left).Caption("STA");
+        column.Add()
+            .Caption("ETA/ATA")
+            .Width(100)
+            .CalculateCellValue(@<text>
+                            function(data) {
+                                return [data.ETA, data.ATA].join("/");
+                            }
+                        </text>);
+   })
+)
+
+<input type="hidden" id="error" value="@Model.ErrorMessage" />
+}
+
+    
+
+
+      <script type="text/javascript">
+       $(function(){
+
+            var firstDay = (new Date().getMonth() + 1) + "/01/" + new Date().getFullYear();
+
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = mm + '/' + dd + '/' + yyyy;
+            var now = new Date();
+            var datepick = new Date(now);
+            /*Thiết lập ngày mặc định cho datepicker*/
+
+
+            $('#txtfromDate').datepicker({
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+                format: 'dd/mm/yyyy',
+                zIndexOffset: '1001'
+               
+
+            });
+            
+            if (datepick != null) {
+                $("#txtfromDate").datepicker("setDate", datepick);
+            }
+        
+             $('#txttoDate').datepicker({
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+                format: 'dd/mm/yyyy',
+                zIndexOffset: '1001'
+            });
+             if (datepick != null) {
+                $("#txttoDate").datepicker("setDate", datepick);
+            }
+
+            if ($("#error").val() != null && $("#error").val() != "") {
+                alertify.alert($("#error").val());
+                return false;
+
+            }
+
+        });
+    </script>
+
+     <script>
+
+     function onItemClick(data) {     
+        var routing= data.Dep+ "/" +data.Arr;
+        var date=convert(data.FlightDate);
+        var FltNo="QH"+ data.FltNo;
+        var FlightID=data.FlightID;
+        window.location.href = "/CR/ControlReport/CreateReport/Index?FltNo="+ FltNo + "&Route=" + routing + "&Aircraft=" +data.Aircraft + "&Reg=" +data.RegisterNo +"&Date=" + date + "&FlightID=" + FlightID ;
+        return false;
+
+    }
+     function convert(str) {
+      var date = new Date(str),
+        month = ("0" + (date.getMonth() + 1)).slice(-2),
+        day = ("0" + date.getDate()).slice(-2);
+      return [date.getFullYear(), month, day].join("-");
+    } 
+    </script>

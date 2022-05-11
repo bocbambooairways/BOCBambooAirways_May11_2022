@@ -1,0 +1,36 @@
+﻿  <div style="margin-left:5%;margin-top:10px;margin-bottom:20px;overflow:hidden;padding-top:10px" class="">
+<span style="float:left;margin-right:10px">Show</span><span>
+         
+                 <select class="form-control" name="pagesize" id="pagesize" onchange="changePage()" style="width:60px;float:left;margin-right:10px;transform:translate(0px,-5px)">
+                  <option selected >10</option>
+                  </select>
+    
+</span>
+<span style="float:left;margin-right:10px;text-align:center">@ViewBag.currentpage of @ViewBag.numSize</span>
+<span style="float:left;margin-right:10px">
+            @if(@ViewBag.currentpage <= 1)
+            {
+  <button id="previous" name="previous" class="btn btn-danger" type="submit" value="previous"  style="width:50px;transform:translate(0px,-5px)" disabled>&lt;</button>
+            }
+            else
+            {
+  <button id="previous" name="previous" class="btn btn-danger" type="submit" value="previous"  style="width:50px;transform:translate(0px,-5px)">&lt;</button>
+             
+            }
+</span>
+<span style="float:left;margin-right:10px">
+            @if(@ViewBag.currentpage >= @ViewBag.numSize)
+            {
+                <button id="next" name="next" class="btn btn-danger" type="submit" style="width:50px;transform:translate(0px,-5px)" value="next" onclick="" disabled>></button>
+
+            }
+            else
+            {
+               <button id="next" name="next" class="btn btn-danger" type="submit" style="width:50px;transform:translate(0px,-5px)" value="next" onclick="">></button>
+
+            }
+  </span>  
+</div>
+<input type="hidden" name="currentpage" id="currentpage" value="@ViewBag.currentpage" />
+<input type="hidden" name="_pagesize" id="_pagesize" value="@ViewBag.pagesize"/>
+

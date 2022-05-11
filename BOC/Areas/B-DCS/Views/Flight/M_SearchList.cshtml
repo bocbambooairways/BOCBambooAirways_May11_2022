@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewData["Title"] = "M_FlightList";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+
+
+@using (Html.BeginForm("M_SearchList", "Flight", FormMethod.Post)) {
+    @if (@Model!= null)
+    {
+        @foreach (var item in Model)
+        {
+            if (Model.IndexOf(item) == 0)
+            {
+                ViewBag.Margin_top = "100px";
+            }
+            else
+            {
+                ViewBag.Margin_top = "20px";
+            }
+            <div style="width:90%;
+                margin:auto;
+                background-color:#F0F0F0;
+                padding-top:20px;
+                padding-bottom:20px;
+                margin-top:@ViewBag.Margin_top;
+                margin-bottom:20px;
+                border-radius:20px">
+
+                <a style="text-decoration:none" href="/B-DCS/Flight/M_Passenger?FlightID=8c11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a @item.FlightID&FlightInfor=134cvd7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a_@item.FltNo/@item.FlightDate/@item.Arr-@item.Dep"><h4 style="text-align:center">@item.FltNo/@item.FlightDate/@item.Arr-@item.Dep</h4></a>
+                <div style="display:flex;width:100%;margin-top:10px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center;">STD/ETD</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.STD/@item.ETD
+                    </div>
+                </div>
+
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center;">Aircraft/RegisterNo</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.Aircraft/@item.RegisterNo
+                    </div>
+                </div>
+
+
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">Gate/Parking</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.Gate/@item.Parking
+                    </div>
+                </div>
+
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">STA/ETA</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.STA/@item.ETA
+                    </div>
+                </div>
+
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">Crew</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.CrewInfo
+                    </div>
+                </div>
+
+
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">Crew Bag</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.CrewBag
+                    </div>
+                </div>
+
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">Co_Mat</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.Co_Mat
+                    </div>
+                </div>
+
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">Pag bag p/w</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.PassengerBag/@item.PassengerInfo
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    }
+    @Html.Partial("Pagination")
+
+}

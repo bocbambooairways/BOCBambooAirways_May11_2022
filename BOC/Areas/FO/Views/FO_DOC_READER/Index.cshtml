@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+@using DevExtreme.AspNet.Mvc;
+@using BOC.Models;
+@model FlightViewModel;
+
+
+
+<div class="container" style="margin-top:100px;">
+    <h2>Result search : @ViewBag.Name</h2>
+    <form method="post" id="frmDocReader" enctype="multipart/form-data" asp-controller="FO_DOC_READER" asp-action="Index">
+        <div class="row">
+            <div class="col-md-4">Input email: (E.g.:tinhnd)</div>  
+            <div class="col-md-8">@Html.TextBoxFor(model => model.Email, new { @class = "form-control", id = "username", placeholder = "Input Your Account" })</div>
+        </div>
+        <br>
+         <div class="row">
+            <div class="col-md-4">Input BAV ID: (E.g.:0787) </div>  
+            <div class="col-md-8">@Html.TextBoxFor(model => model.Baver_ID, new { @class = "form-control", id = "employeeid", placeholder = "Input Your EmployeeID" })</div>
+        </div>
+        <br />
+         <div class="row">
+            <div class="col-md=4" style="margin-left:20px;">  Input Your Fleet :</div>  
+            <div class="col-md-8">
+                     <div style="position:relative;width:360px;height:calc(1.5em + .75rem + 2px);border:0;padding:0;margin:0;">
+                        <select name="fleet" style="position:absolute;top:0px;left:0px;width:360px; height:calc(1.5em + .75rem + 2px);line-height:20px;margin:0;padding:0;"
+                                value={this.props.fleet ? this.props.fleet : null}
+                                onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('yourfleet').value=this.options[this.selectedIndex].value;">
+                            <option value="null"></option>
+                            <option value="787">787</option>
+                            <option value="320">320</option>
+                            <option value="190">190</option>
+                        </select>
+                        <input type="text" name="displayValue" id="displayValue"
+                               placeholder="Add/select a fleet" onfocus="this.val()"
+                               style="position:absolute;top:0px;left:0px;width:340px;height:calc(1.5em + .75rem + 2px);border:1px solid #556;">
+                        @Html.HiddenFor(model => model.YourFleet, new { @id = "yourfleet", @Name = "yourfleet" });
+                   </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <input type="submit" style="margin-left:20px;" value="OK" class="btn btn-primary" />
+        </div>
+    </form>
+
+</div>
+<br />
+@if (TempData["Feedback"] != null)
+{
+<input type="hidden" id="error" value="@Model.ErrorMessage" />
+}
+
+@if (Model != null && Model.FlightInfo != null && Model.FlightInfo.Count > 0)
+{
+
+    @*@(Html.DevExtreme().DataGrid()
+                .ID("gridContainer")
+                .ShowBorders(true)
+                .DataSource(Model.FlightInfo, "FODocReader_ID")
+                .Columns(c =>
+                {
+                    c.Add().DataField("ID").Caption("No").Width("5%");
+                    c.Add().DataField("FileName").Width("80%");
+                    c.Add().DataField("ReadTime").Width("15%");
+                    c.Add().DataField("Notify").Width("10%");
+               
+                })
+                .Paging(p => p.PageSize(20))
+                .Pager(pager =>
+                {
+                    pager.ShowPageSizeSelector(true);
+                    pager.AllowedPageSizes(new[] { 10, 20, 50 });
+                    pager.ShowInfo(true);
+                })
+                .ShowBorders(true)
+                .ShowColumnLines(true)
+                .ShowRowLines(true)
+                .FilterRow(f => f.Visible(true))
+                .HeaderFilter(f => f.Visible(false))
+                .GroupPanel(p => p.Visible(true))
+                .Grouping(g => g.AutoExpandAll(false))
+                .RemoteOperations(true)
+                .WordWrapEnabled(true)
+                .GroupPanel(z => z.AllowColumnDragging(false))
+
+        )*@
+        foreach(var item in Model.FlightInfo)
+        {
+              <div class="card text-dark bg-light mb-3" style="max-width: 96%;margin-left:10px;">
+                    <div class="card-header">
+                        <div class="row" style="padding-left:20px;">
+                               @item.ID.ToString()
+                        </div>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <b style="font-size: small;">FileName:</b>
+                            </div>
+                            <div class="col-8">
+                                <i style="font-size: small;">@item.FileName.ToString()</i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <b style="font-size: small;">Read Time:</b>
+                            </div>
+                            <div class="col-8">
+                                <i style="font-size: small;">@item.ReadTime.ToString()</i>
+                            </div>
+                        </div>
+                         <div class="row">
+                            <div class="col-4">
+                                <b style="font-size: small;">Notify:</b>
+                            </div>
+                            <div class="col-8">
+                                <i style="font-size: small;">@item.Notify.ToString()</i>
+                            </div>
+                        </div>
+                    </div>
+                  
+                   @* <div class="card-footer">
+                          <div class="row">
+                            <div class="col">
+                                <i style="font-size: small;">@item.UserUpdate.ToString()</i>
+                            </div>
+                            <div class="col">
+                                <i style="font-size: small;">@item.RecDate.ToString()</i>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+        }    
+
+       
+
+}
+
+
+<script>
+    $(function () {
+
+        if ($("#error").val() == "Data entered must not be blank!") {
+            alertify.alert($("#error").val());
+        }
+
+
+
+    })
+
+</script>
+

@@ -1,0 +1,250 @@
+﻿@using Newtonsoft.Json;
+@using BOC.Areas.BaggageMiss.Models;
+@model PirModel;
+
+
+
+<html>
+<head>
+    <meta charset="UTF-8">
+   <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
+    <style>
+      table.GeneratedTable {
+        width: 100%;
+        background-color: #ffffff;
+        border-collapse: collapse;
+        border-width: 2px;
+        border-color: #080808;
+        border-style: solid;
+        color: #000000;
+		font-size:10pt;
+      }
+      
+      table.GeneratedTable td, table.GeneratedTable th {
+        border-width: 2px;
+        border-color: #080808;
+        border-style: solid;
+        padding: 4px;
+        
+      }
+      
+      table.GeneratedTable thead {
+        background-color: #ffffff;
+      }
+	  
+	   .left, .right {
+            width: 25%;
+            height: 100px;
+        }
+
+        .middle {
+            width: 50%;
+            height: 100px;
+            text-align: center;
+        }
+        body{
+            font-family:'Times New Roman';
+        }
+  
+      </style>
+
+  </head>
+  <body>
+   <div class="row">
+            <div class="column left">
+                <img src="/images/logo.png"  class="logo" style="width:94%;margin-top:10px;margin-left:20px;">
+            </div>
+            <div class="column middle">
+				<p style="margin-top:20px;margin-left:25px;font-weight:bold;">
+					PROPERTY IRREGULARITY REPORT (PIR)<br>
+					<i>BIÊN BẢN BẤT THƯỜNG VỀ HÀNH LÝ</i>
+				</p>
+            </div>
+			<div class="column right">
+				<p style="margin-top:10px;">
+					To be issued in BLOCK letters<br>
+					<i>Điền thông tin bằng chữ IN HOA</i>
+				</p>
+            </div>
+	</div>	
+  <table class="GeneratedTable">
+  <thead></thead>
+  
+  <tbody>
+  <tr>
+      <td rowspan="3">FR</td>
+      <td rowspan="3" colspan="15" style="margin-top:-10px!important;">&nbsp;&nbsp;Station/<i>Sân bay</i>&nbsp;&nbsp;&nbsp;&nbsp;Airline/<i>Hãng vận chuyển</i>&nbsp;&nbsp;&nbsp;&nbsp;File Number/<i>Số biên bản</i><br />&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;<b> @Model.Data.Airport.ToString()/QH/@Model.Data.ProfileNo.ToString()</b></td>
+      <td rowspan="2" colspan="3" style="text-align:center;">Delay<br><i>Chậm chuyến</i><br><input type="checkbox"></td>
+      <td rowspan="2" colspan="3" style="text-align:center;">Missing<br><i>Thất lạc</i><br><input type="checkbox"></td>
+      <td rowspan="2" colspan="3" style="text-align:center;">Damage<br><i>Hư hại</i><br><input type="checkbox"></td>
+      <td rowspan="2" colspan="4" style="text-align:center;">Pilferage<br><i>Hao hụt trọng lượng</i><br><input type="checkbox"></td>
+      <td rowspan="2" colspan="3" style="text-align:center;">Courtesy<br><i>Các TH khác</i><br><input type="checkbox" checked></td>
+      <td rowspan="10" colspan="15">Baggage Tag/<i>Thẻ hành lý</i></td>
+    
+  </tr>
+  
+  <tr></tr><tr>
+      <td>IT</td>
+      <td colspan="3">Initial</td>
+      <td>PT</td>
+      <td colspan="4">Title(MR/MS)</td>
+      <td>PS</td>
+      <td colspan="6">Cabin Class(F/C/Y)</td>
+    
+  </tr><tr>
+      
+  </tr>
+  <tr>
+      <td>NM</td>
+      <td colspan="31" rolspan="2">Passenger's name/</i> Tên hành khách</i> &nbsp;:<b>@Model.Data.FullName.ToString()</b></td>
+    
+  </tr>
+  <tr>
+      <td>TN</td>
+      <td colspan="31">Baggage Tag Number/<i>Số thẻ hành lý</i></td>
+      
+  </tr>
+  <tr>
+      <td>CT</td>
+      <td colspan="31" rowspan="2">Color and Type Description/<i> Mô tả màu sắc và chủng loại</i>&nbsp;:<b>@ViewBag.ColorType.ToString()</b></td>    
+  </tr>
+  <tr><td></td>
+    
+        
+  </tr>
+  <tr>
+      <td>BI</td>
+      <td colspan="31" rowspan="2">Brand Name/<i>Nhãn hiệu</i> </td>
+  </tr>
+  <tr>
+    <td></td>
+        
+  </tr>
+  <tr>
+      <td>FD</td>
+      <td colspan="15">Flight Number &amp; Date/<i> Số hiệu chuyến bay và ngày bay</i> &nbsp;:<b>@Model.Data.FltNo.ToString() & @Model.Data.Date.ToString()</b></td>
+      <td>RT</td>
+      <td colspan="15">Routing and additional stations to be traced/<i>Hành trình và các điểm đến bổ sung để tìm kiếm</i></td>
+      <td colspan="15" rowspan="10">Other comments/<i>Thông tin khác</i> :<br /><b>@ViewBag.OtherComments.ToString()</b></td>
+  </tr>
+  <tr>
+      <td rowspan="2">BR</td>
+      <td rowspan="2" colspan="15">Baggage Routing/<i> Hành trình của hành lý</i> &nbsp;:<b>@Model.Data.Dep.ToString()-@Model.Data.Arr.ToString()</b></td>
+      <td rowspan="2">BW</td>
+      <td colspan="4" style="text-align:center;">Total Bag<br><br><i> Tống số hành lý</i> </td>
+      <td rowspan="2">DW</td>
+      <td colspan="4" style="text-align:center;">Delivered Bag<br><i> Hành lý đã nhận</i> <br></td>
+      <td rowspan="2">NW</td>
+      <td colspan="5" style="text-align:center;">Missing Bag <br><i> Hành lý thất lạc</i> </td>   
+   </tr>
+    
+  <tr>
+      <td colspan="4" style="text-align:center;">/</td>
+      <td colspan="4" style="text-align:center;">/</td>
+      <td colspan="5" style="text-align:center;">/</td>
+  </tr>
+  <tr>
+      <td rowspan="3" style="
+    background-color: #92d050;
+">PA</td>
+      <td rowspan="3" colspan="15">Permanent Address/ <i> Địa chỉ thường trú</i> &nbsp;:<b>@Model.Data.Address.ToString()</b></td>
+      
+   </tr>
+   <tr>
+    <td style="
+    background-color: #92d050;
+">CP</td>
+      
+      <td colspan="15">Cell Phone Number (+ Country Code)/ <i>Số điện thoại di động (+ Mã quốc gia)</i>&nbsp;:<b>(+84) @Model.Data.Phone.ToString()</b></td>
+  </tr>
+  <tr>
+    
+      <td style="
+    background-color: #92d050;
+">PN</td>
+      <td colspan="15">Phone Number at Permanent Address/<i>Số điện thoại tại địa chỉ thường trú</i></td>
+  </tr>
+   
+  <tr>
+      <td rowspan="2" style="
+    background-color: #92d050;
+">TA</td>
+      <td rowspan="2" colspan="15">Temporary Address/<i> Địa chỉ tạm trú</i></td>
+      <td style="
+    background-color: #92d050;
+">TP</td>
+      <td colspan="15">Phone Number at temporary address/ <i>Số điện thoại địa chỉ tạm trú</i></td>
+  </tr> 
+  <tr>
+      <td style="
+    background-color: #92d050;
+">DV</td>
+      <td colspan="15">Lengths of stay/<i> Thời gian lưu trú</i></td>
+  </tr>
+  <tr>
+      <td style="
+    background-color: #92d050;
+">LD</td>
+       <td colspan="15">Delivery instruction/<i> Hướng dẫn vận chuyển</i></td>
+      <td style="
+    background-color: #92d050;
+">EA</td>
+      <td colspan="15">Email Address/<i> Địa chỉ E-mail</i>&nbsp;:<b>@Model.Data.Email.ToString()</b></td>
+  </tr>
+  <tr>
+      <td style="
+    background-color: #92d050;
+">CI</td>
+      <td colspan="15">Customs Information/<i> Thông tin khi khai báo hải quan</i></td>
+      <td style="
+    background-color: #92d050;
+">TK</td>
+      <td colspan="15">Ticket Number/<i> Số vé</i></td>
+  </tr>
+  <tr>
+      <td rowspan="5" style="height:200px;">TD</td>
+      
+  </tr>
+   <tr>
+      <td colspan="10" rowspan="4" style="width: 600px;height:200px!important;">
+        <p style="margin-top: -30px;">Damaged Area/<i> Vị trí hư hại</i></p>
+        <img src="/images/BaggageMiss/baginfo.png" height="140">
+    </td>
+      <td rowspan="4" style="height:200px!important;">BD</td>
+      
+      <td colspan="10" rowspan="4" style="height:200px!important;"><p style="margin-top: -100px;">Damaged Details/<i> Thông tin hư hại</i></p></td>
+      
+      <td colspan="14" rowspan="4" style="height:200px!important;"><img src="/images/BaggageMiss/tableinfo.png" height="200" width="330"></td>
+      
+      <td rowspan="4" style="height:200px!important;">LP</td>
+      <td colspan="14" style="height:60px!important;">Lost Property/<i> Tài sản bị mất</i></td>
+  </tr>
+    
+  <tr>
+      <td rowspan="3" colspan="14" style="height:140px!important;"></td>
+  </tr>
+  
+  <tr>
+  </tr>
+  <tr>
+  </tr> 
+  <tr style="height:150px;">
+      <td colspan="2" style="text-align:center;"><p style="text-align:center;margin-top:-60px;">Date of Purchase <br> <i>Ngày mua</i></p></td>
+      <td colspan="15" style="width: 300px!important;"><p style="text-align:center;margin-top:-60px;">MM/DD/YYYY /<i> Tháng/ngày/năm</i></p></td>
+      <td><p style="text-align:center;margin-top:-60px;">Price <br> Giá</p></td>
+      <td colspan="10"><p style="text-align:center;margin-top:-60px;">Orginal Purchase Price/<i> Giá trị lúc mua</i></p></td>
+      <td>CD</td>
+      <td colspan="15"><p style="text-align:center;margin-top:-60px;">Damaged Goods/<i> Vật phẩm bị hư hại</i></p></td>
+
+    </tr>
+  <tr>
+      <td colspan="15" rowspan="2" style="text-align:center;height:200px;"><p style="text-align:center;margin-top:-80px;">Staff/<i>Xác nhận của nhân viên</i></p></td>
+      <td colspan="15" rowspan="2" style="text-align:center;"><p style="text-align:center;margin-top:-80px;">Date/<i> Ngày</i></p></td>
+      <td colspan="15" rowspan="2" style="text-align:center;"><p style="text-align:center;margin-top:-80px;">Passenger/<i> Xác nhận của hành khách</i></td>
+      
+    </tr>
+    
+  </tbody>
+  </table>
+  </body>
+  </html>

@@ -1,0 +1,282 @@
+﻿
+@{
+    ViewData["Title"] = "FlightOne";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+@{
+    var date = @HttpContextAccessor.HttpContext.Session.GetString("Date");
+    var flightno ="QH" + @HttpContextAccessor.HttpContext.Session.GetString("FlightNo");
+    var routing= @HttpContextAccessor.HttpContext.Session.GetString("Routing");
+}
+ @using Microsoft.AspNetCore.Http;
+ @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@using BOC.Models;
+@model FlightOneModel;
+<style>
+    #box {
+           background-color: #006BB8;
+            width: 100%;
+            border-radius: 10px;
+            padding: 5px;
+            margin: 2px;
+            height: 50px;
+
+    }
+
+    #div1 {
+        height: 30px;
+        width: 200px;
+        float: left;
+        color: #333;
+        font-family: Tahoma;
+    }
+
+    #div2 {
+        height: 30px;
+        width: 100%;
+        border: solid 1px #acd9f5;
+        float: left;
+        margin-bottom: 5px;
+        color: #333;
+        font-family: Tahoma;
+        padding-top:2px;
+    }
+
+    #div1, #div2 {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .inline {
+        display: inline-block;
+        margin: 2px;
+    }
+</style>
+
+@if (Model != null)
+{
+    <div class="container" style="margin-top:100px;">
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Aircraft:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.Aircraft.BackColor.ToString();color:@Model.Aircraft.FontColor.ToString();">
+                      @Model.Aircraft.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">RegisterNo:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.RegisterNo.BackColor.ToString();color:@Model.RegisterNo.FontColor.ToString();">
+                     @Model.RegisterNo.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Gate:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.Gate.BackColor.ToString();color:@Model.Gate.FontColor.ToString();">
+                      @Model.Gate.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Dep Bay:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.Bay_Dep.BackColor.ToString();color:@Model.Bay_Dep.FontColor.ToString();">
+                      @Model.Bay_Dep.Value.ToString()
+                  </div>
+              </div>
+        </div>
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Belt:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.Belt_Dep.BackColor.ToString();color:@Model.Belt_Dep.FontColor.ToString();">
+                      @Model.Belt_Dep.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">STD:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.STD.BackColor.ToString();color:@Model.STD.FontColor.ToString();">
+                      @Model.STD.Value.ToString()
+                  </div>
+              </div>
+        </div>
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">ETD:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.ETD.BackColor.ToString();color:@Model.ETD.FontColor.ToString();">
+                      @Model.ETD.Value.ToString()
+                  </div>
+              </div>
+        </div>
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">BDT:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.BDT.BackColor.ToString();color:@Model.BDT.FontColor.ToString();">
+                      @Model.BDT.Value.ToString()
+                  </div>
+              </div>
+        </div>
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">D Close:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.DoorClose.BackColor.ToString();color:@Model.DoorClose.FontColor.ToString();">
+                      @Model.DoorClose.Value.ToString()
+                  </div>
+              </div>
+        </div>
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Chock Off:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.ATD.BackColor.ToString();color:@Model.ATD.FontColor.ToString();">
+                      @Model.ATD.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Take Off:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.TOff.BackColor.ToString();color:@Model.TOff.FontColor.ToString();">
+                      @Model.TOff.Value.ToString()
+                  </div>
+              </div>
+        </div>
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Estimate Pax:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.PaxEst_Full.BackColor.ToString();color:@Model.PaxEst_Full.FontColor.ToString();">
+                      @Model.PaxEst_Full.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Actual Pax:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.Pax_Full.BackColor.ToString();color:@Model.Pax_Full.FontColor.ToString();">
+                      @Model.Pax_Full.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Cargo:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.Cargo_Full.BackColor.ToString();color:@Model.Cargo_Full.FontColor.ToString();">
+                      @Model.Cargo_Full.Value.ToString()
+                  </div>
+              </div>
+        </div>
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Co Mat:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.Co_Mat_Full.BackColor.ToString();color:@Model.Co_Mat_Full.FontColor.ToString();">
+                      @Model.Co_Mat_Full.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Fuel Remain:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.Fuel_Remmain.BackColor.ToString();color:@Model.Fuel_Remmain.FontColor.ToString();">
+                      @Model.Fuel_Remmain.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Fuel Fill:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.Fuel_Topup.BackColor.ToString();color:@Model.Fuel_Topup.FontColor.ToString();">
+                      @Model.Fuel_Topup.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">STA:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.STA.BackColor.ToString();color:@Model.STA.FontColor.ToString();">
+                      @Model.STA.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">ETA:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.ETA.BackColor.ToString();color:@Model.ETA.FontColor.ToString();">
+                      @Model.ETA.Value.ToString()
+                  </div>
+              </div>
+        </div>
+         <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Touch Down:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.TDown.BackColor.ToString();color:@Model.TDown.FontColor.ToString();">
+                      @Model.TDown.Value.ToString()
+                  </div>
+              </div>
+        </div>
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Chock On:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.ATA.BackColor.ToString();color:@Model.ATA.FontColor.ToString();">
+                      @Model.ATA.Value.ToString()
+                  </div>
+              </div>
+        </div>
+        <div class="row" style="font-size:12px;">
+            <div class="col-4">
+                  <div id="div1">Arr Bay:</div>
+            </div>
+              <div class="col-8">
+                  <div id="div2" style="background-color:@Model.Bay_Arr.BackColor.ToString();color:@Model.Bay_Arr.FontColor.ToString();">
+                      @Model.Bay_Arr.Value.ToString()
+                  </div>
+              </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,29 @@
+﻿@using Newtonsoft.Json;
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script>
+  
+    $(function () {
+        
+          var t_lang = @Html.Raw(JsonConvert.SerializeObject(@ViewBag.Lang));
+            
+          var t_bagmiss_id = @Html.Raw(JsonConvert.SerializeObject(@ViewBag.Bagmiss_Id));
+                  
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+              // true for mobile device
+              return  window.location.href ="/BaggageMiss/MPages/Index?t_flag="+ t_lang+ "&t_bagmiss_id=" +t_bagmiss_id;
+           
+            }
+            else{
+              // false for not mobile device
+              return  window.location.href ="/BaggageMiss/Pages/Index?t_flag="+ t_lang+ "&t_bagmiss_id=" +t_bagmiss_id;
+            }
+          
+
+        })
+
+          
+ </script>
+
+

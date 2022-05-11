@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DeskTop.cshtml";
+}
+
+
+<style>
+   .glyphicon-calendar {
+    font-size: 15pt;
+}
+
+.input-group {
+    width: 180px;
+    margin-top: 30px;
+}
+
+</style>
+
+
+
+
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css' media="screen" />
+
+@*    <link rel="stylesheet" href='~/css/controlreport/bootstrap.min.css' media="screen" />*@
+    <!-- Bootstrap DatePicker -->
+    <link rel="stylesheet" href="~/css/controlreport/bootstrap-datepicker.css" type="text/css" />
+
+   
+
+ 
+    <h1 style="color:red;text-align:center;">Tìm kiếm báo cáo/ Report search area</h1>
+    <br />
+    <div class='container' style="margin-left:300px!important;">
+        <div class="row"> 
+            <div style="margin-left:16px;"><b>Ngày báo cáo</b>/ Report date:</div>
+            <div class="form-group col-xs-4" style="margin-left: 50px;">
+                            <div class="input-group">
+                                <input id="txtfromDate" type="text" class="form-control date-input" readonly="readonly" style="margin-top:-60px;width:210px;"/>
+                                <label class="input-group-btn" for="txtfromDate">
+                                    <span class="btn btn-default" style="margin-top:-60px;">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </label>
+                            </div>
+            </div>
+             <b style="margin-left:-40px;">-</b>
+             <div class="form-group col-xs-4">
+                            <div class="input-group">
+                                <input id="txttoDate" type="text" class="form-control date-input" readonly="readonly" style="margin-top:-60px;margin-left: -58px;width:210px;"/>
+                                <label class="input-group-btn" for="txttoDate">
+                                    <span class="btn btn-default" style="margin-top:-60px;">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </label>
+                            </div>
+            </div>
+        </div>
+       <div class="row" style="margin-top:-10px;"> 
+            <div class="col-3"><b>Từ khóa</b>/ Key search:</div>
+            <div class="col-9"><input type="text" id="keysearch" style="width:538px;margin-left:-45px;"/></div>
+       </div>
+       <br />
+        <div class="row"> 
+            <div class="col-4"><b>Trạng thái báo cáo</b>/ Report status:</div>
+            <div class="col-8" style="width:538px!important;margin-left:-60px;">
+                <select id="reportstatus"  name="reportstatus" multiple>
+                    <option value="Draft">&nbsp;&nbsp;&nbsp;&nbsp;Draft</option>
+                    <option value="Deleted">&nbsp;&nbsp;&nbsp;&nbsp;Deleted</option>
+                    <option value="Waiting accept">&nbsp;&nbsp;&nbsp;&nbsp;Waiting accept</option>
+                    <option value="Accepted">&nbsp;&nbsp;&nbsp;&nbsp;Accepted</option>
+                    <option value="Risk assessment">&nbsp;&nbsp;&nbsp;&nbsp;Risk assessment</option>
+                </select>
+   
+            </div>
+       </div>
+       <br />
+       <div style="margin-left:638px;">
+           <input type="button" value="Tìm kiếm/ Search" class="btn btn-primary" />
+       </div>
+    </div>
+
+
+    <script type="text/javascript">
+       $(document).ready(function() {
+            $('#reportstatus').multiSelect();
+
+            $('#txtfromDate').datepicker({
+                format: "dd/mm/yyyy"
+            });
+             $('#txttoDate').datepicker({
+                format: "dd/mm/yyyy"
+            });
+         
+        });
+    </script>

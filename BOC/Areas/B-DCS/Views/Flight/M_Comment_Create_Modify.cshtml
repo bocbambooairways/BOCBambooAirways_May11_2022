@@ -1,0 +1,45 @@
+﻿@using DevExtreme.AspNet.Mvc
+    @{
+    ViewData["Title"] = "M_Index";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+     }
+    <div style="width:90%;
+                margin:auto;
+                background-color:white;padding-bottom:20px">
+    <div style="display:flex;width:100%;margin-top:100px">
+    <div style="flex:40%;background-color:white;text-align:center;padding-top:6px">Flight Info</div>
+    <div style="flex:60%;background-color:white">
+    <input type="text" id="Airports" name="Airports" class="form-control" placeholder ="Flight Info" value="@ViewBag.FlightInfo" readonly/>
+    </div>
+    </div>
+    <div style="display:flex;width:100%;margin-top:20px">
+    <div style="flex:40%;background-color:white;text-align:center;padding-top:6px">Passenger Name</div>
+    <div style="flex:60%;background-color:white">
+    <input type="text" id="Pax_name" name="Pax_name" class="form-control" placeholder ="Passenger Name" value="@ViewBag.Pax_name" readonly/>
+    </div>
+    </div>
+    <div style="display:flex;width:100%;margin-top:20px">
+    <div style="flex:40%;background-color:white;text-align:center;padding-top:6px">Comment</div>
+    <div style="flex:60%;background-color:white;">
+    <textarea style="flex:80%;background-color:white;text-align:center;border-radius:5px" class="form-control" rows="5" id="" name="comment_reply" placeholder="Typing your comment"></textarea>
+    </div>
+    </div>
+    <div style="display:flex;width:100%;margin-top:20px">
+    <div style="flex:40%;background-color:white;text-align:center;padding-top:6px">Status</div>
+    <div style="flex:60%;background-color:white">
+                @(Html.DevExtreme().SelectBox()
+                    .DataSource(Model.Items)
+                    .Placeholder("Select Active / Delete")
+                    .ShowClearButton(true)
+                )
+    </div>
+    </div>
+     <div style="display:flex;width:100%;margin-top:20px">
+    <div style="flex:40%;background-color:white;text-align:center;padding:5px">
+    <button style="width:80%;background-color:darkgreen;margin:auto" class="btn btn-danger">OK</button>
+    </div>
+    <div style="flex:60%;background-color:white;text-align:center;padding:5px;padding-bottom:20px">
+    <a href="/B-DCS/Flight/M_Comment?ifly_Pax_ID=acbd049f221af82804c5a2826809337c9b_@ViewBag.ifly_Pax_ID&Pax_name=bcbd049f221af82804c5a2826809337c9b_@ViewBag.Pax_name&SEQ_Seat_ST=cvcbd049f221af82804c5a2826809337c9b_@ViewBag.SEQ_Seat_ST&PNR_Ticket=bnmcbd049f221af82804c5a2826809337c9b_@ViewBag.PNR_Ticket&Class_SSR=zacbd049f221af82804c5a2826809337c9b_@ViewBag.Class_SSR&Remark=wecbd049f221af82804c5a2826809337c9b_@ViewBag.Remark" style="width:60%;background-color:darkgreen;margin:auto" class="btn btn-danger">Cancel</a>
+   </div>
+    </div>
+    </div>

@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewData["Title"] = "Discussion";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+@{
+    var date = @HttpContextAccessor.HttpContext.Session.GetString("Date");
+    var flightno ="QH" + @HttpContextAccessor.HttpContext.Session.GetString("FlightNo");
+    var routing= @HttpContextAccessor.HttpContext.Session.GetString("Routing");
+}
+
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@using BOC.Models;
+@model List<Conference>;
+
+<style>
+    #box {
+           background-color: #006BB8;
+            width: 100%;
+            border-radius: 10px;
+            padding: 5px;
+            margin: 2px;
+            height: 50px;
+
+    }
+
+    #div1 {
+        height: 30px;
+        width: 35%;
+        float: left;
+        color: #333;
+        font-family: Tahoma;
+    }
+
+    #div2 {
+        height: 30px;
+        width: 65%;
+        border: solid 1px #acd9f5;
+        float: left;
+        margin-bottom: 5px;
+        color: #333;
+        font-family: Tahoma;
+        padding-top:2px;
+    }
+
+    #div1, #div2 {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .inline {
+        display: inline-block;
+        margin: 2px;
+    }
+</style>
+
+@if (Model != null)
+{
+   foreach (var item in Model)
+   {
+         
+                <div class="card text-dark bg-light mb-3" style="max-width: 96%;margin-left:10px;margin-top:100px;">
+                    <div class="card-header">
+                        <div class="row">
+                                Discussion
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">             
+                            <b>Airport:</b>@item.Airport.ToString()
+                        </p>
+                        <p class="card-text">             
+                            <b>DivisionName:</b>@item.DivisionName.ToString()
+                        </p>
+                         <p class="card-text">             
+                            <b>Remark:</b>@item.Remark.ToString()
+                        </p>
+                        <p class="card-text">             
+                            <b>Msg.Type:</b>@item.MessageType.ToString()
+                        </p>
+                         <p class="card-text">             
+                            <b>Status:</b>@item.Status.ToString()
+                        </p>
+                        <p class="card-text">             
+                            <b>Create User:</b>@item.CreateUser.ToString()
+                        </p>
+                         <p class="card-text">             
+                            <b>Create Date:</b>@item.CreateDate.ToString()
+                        </p>
+                         <p class="card-text">             
+                            <b>Delete User:</b>@item.DeleteUser.ToString()
+                        </p>
+                         <p class="card-text">             
+                            <b>Delete Date:</b>@item.DeleteDate.ToString()
+                        </p>
+                    </div>
+                   @* <div class="card-footer">
+                          <div class="row">
+                            <div class="col">
+                                <i style="font-size: small;">@item.UserUpdate.ToString()</i>
+                            </div>
+                             <div class="float-right">
+                                <i style="font-size: small;">@item.RecDate.ToString()</i>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+
+
+     }
+}
+@if (Model.Count == 0)
+{
+      <div class="card text-dark bg-light mb-3" style="max-width: 96%;margin-left:10px;margin-top:100px;">
+                    <div class="card-header">
+                        <div class="row">
+                                Discussion
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">             
+                            <b>No data</b>
+                        </p>
+                    </div>
+       </div>
+    
+}
+

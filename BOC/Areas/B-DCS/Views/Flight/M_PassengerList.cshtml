@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "M_FlightList";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+
+
+@using (Html.BeginForm("M_PassengerList", "Flight", FormMethod.Post)) {
+    @if (@Model!=null)
+    {
+        @foreach (var item in Model)
+        {
+            if (Model.IndexOf(item) == 0)
+            {
+                ViewBag.Margin_top = "100px";
+            }
+            else
+            {
+                ViewBag.Margin_top = "20px";
+            }
+            <div style="width:90%;
+                margin:auto;
+                background-color:#F0F0F0;
+                padding-top:20px;
+                padding-bottom:20px;
+                margin-bottom:10px;
+                margin-top: @ViewBag.Margin_top; 
+                border-radius:20px">
+
+                <a style="text-decoration:none" href="/B-DCS/Flight/M_Comment?ifly_Pax_ID=88ec11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a_@item.ifly_Pax_ID&Pax_name=788ec11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a_@item.Pax_name&SEQ_Seat_ST=98ec11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a_/@item.seat_number/@item.checkin_status&PNR_Ticket=58ec11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a_@item.pnr_number/@item.ticket_number&Class_SSR=893ec11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a_@item.cabin_class/@item.ssr_code&Remark=@item.Remark"><h4 style="text-align:center">@item.Pax_name</h4></a>
+                <div style="display:flex;width:100%;margin-top:10px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">SEQ/Seat/ST</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                       /@item.seat_number/@item.checkin_status
+                    </div>
+                </div>
+
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center;">PNR/Ticket</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.pnr_number/@item.ticket_number
+                    </div>
+                </div>
+
+
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">Class/SSR</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.cabin_class/@item.ssr_code
+                    </div>
+                </div>
+
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">Remark</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center">
+                        @item.Remark
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+    @Html.Partial("Pagination")
+
+
+}

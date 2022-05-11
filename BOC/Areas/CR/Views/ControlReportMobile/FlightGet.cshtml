@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewData["Title"] = "FlightGet";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+@using DevExtreme.AspNet.Mvc
+@using BOC.Areas.ControlReport.Models;
+@model ControlReportModel;
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@{
+    var sessionName = new Byte[20];
+    bool nameOK = Context.Session.TryGetValue("Username", out sessionName);
+    var sessionToken = @HttpContextAccessor.HttpContext.Session.GetString("Token");
+
+}
+
+
+ <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css' media="screen" />
+
+@*    <link rel="stylesheet" href='~/css/controlreport/bootstrap.min.css' media="screen" />*@
+    <!-- Bootstrap DatePicker -->
+    <link rel="stylesheet" href="~/css/controlreport/bootstrap-datepicker.css" type="text/css" />
+
+<h4 style="text-align:center;margin-top:100px;">Hi @HttpContextAccessor.HttpContext.Session.GetString("Username"), please choose your flight date:</h4>
+
+
+  
+       <div class="row" style="text-align:center;margin-top:60px;">
+            
+                <div class="form-group col-xs-4" style="margin-left: 80px;">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class="form-control date-input",id="txtfromDate",@readonly="readonly", @style="margin-top:-60px;width:210px;" })
+                                    <label class="input-group-btn" for="txtfromDate">
+                                        <span class="btn btn-default" style="margin-top:-60px;">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                          
+                                        </span>
+                                    </label>
+                                </div>
+                     
+                </div>
+                 @Html.HiddenFor(model => model.FromDate)
+                <p style="margin-left:-22px;">------</p>
+
+                 <div class="form-group col-xs-4" style="margin-left:80px;margin-top:50px;">
+                                <div class="input-group">
+                                     @Html.TextBoxFor(m => m.ToDate, new { @class="form-control date-input",id="txttoDate",@readonly="readonly", @style="margin-top: -110px;width:210px" })
+                                    <label class="input-group-btn" for="txttoDate">
+                                        <span class="btn btn-default" style="margin-top:-110px;">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                           
+                                        </span>
+                                    </label>
+                                </div>
+                            
+                </div>
+                @Html.HiddenFor(model => model.ToDate)
+       </div>
+
+       <button class="btn btn-primary" ontouchstart="clickSearch()" style="margin-left: 170px;margin-top:-42px;"  id="search">Search</button>
+    
+   <br />
+@if (Model != null)
+{
+    <input type="hidden" id="error" value="@Model.ErrorMessage" />
+}
+   
+  
+    <script type="text/javascript">
+       $(document).ready(function() {
+            var firstDay = (new Date().getMonth() + 1) + "/01/" + new Date().getFullYear();
+
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = mm + '/' + dd + '/' + yyyy;
+            var now = new Date();
+            var datepick = new Date(now);
+            /*Thiết lập ngày mặc định cho datepicker*/
+
+
+            $('#txtfromDate').datepicker({
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+                format: 'dd/mm/yyyy',
+                zIndexOffset: '1001'
+               
+
+            });
+            
+            if (datepick != null) {
+                $("#txtfromDate").datepicker("setDate", datepick);
+            }
+        
+             $('#txttoDate').datepicker({
+                weekStart: 1,
+                daysOfWeekHighlighted: "6,0",
+                autoclose: true,
+                todayHighlight: true,
+                format: 'dd/mm/yyyy',
+                zIndexOffset: '1001'
+            });
+             if (datepick != null) {
+                $("#txttoDate").datepicker("setDate", datepick);
+            }
+
+            if ($("#error").val() != null && $("#error").val() != "") {
+                alertify.alert($("#error").val());
+                return false;
+
+            }
+
+            
+           
+ 
+    });
+         
+       
+    </script>
+    <script>
+      
+    
+        function clickSearch() {
+
+                var formData = new FormData();
+                var t_fromDate = $("#txtfromDate").val();
+                console.log(t_fromDate);
+                if (t_fromDate === "") {
+                    alertify.alert('FromDate not be blank!');
+                    return false;
+                }
+                else {
+                    formData.append("FromDate", t_fromDate);
+                }
+
+                var t_toDate = $("#txttoDate").val();
+                console.log(t_toDate);
+                if (t_toDate === "") {
+                    alertify.alert('ToDate not be blank!');
+                    return false;
+                }
+                else {
+                    formData.append("ToDate", t_toDate);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("FlightGet", "ControlReportMobile")',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+                          if (data.mess == "OK") {
+                           return window.location.href="/CR/ControlReportMobile/FlightList";
+                        }
+                        //else{
+                        //      alertify.alert(data.mess);
+                        //     return false;
+                        //}
+
+                    },
+                    error: function (data) {
+                        alertify.alert(data.mess);
+                        return false;
+                    }
+
+                });
+        }
+    </script>
+  

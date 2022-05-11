@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewData["Title"] = "FlightList";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+@using BOC.Areas.ControlReport.Models;
+@model ControlReportModel;
+
+
+
+<h1 style="text-align:center;color:red;margin-top:100px;">Flight List</h1>
+
+   @foreach (var item in Model.DataInfo)
+    {
+
+            var @FlightNo = "QH" + @item.FltNo.ToString();
+            <div class="card text-dark bg-light mb-3" style="max-width: 96%;margin-left:10px;">
+                <div class="card-header">
+                  
+                      <div class="row">
+                             <div class="float-left">
+                                 <b>@item.FlightDate.ToShortDateString()</b>/<b>@FlightNo.ToUpper()</b>/<b>@item.Dep.ToUpper()-@item.Arr.ToUpper()</b>
+                            </div>
+                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <div class="float-right">
+                                 <a class="add" href="#" data-bb="@item.FlightDate.ToShortDateString(),@FlightNo.ToUpper(),@item.Dep.ToUpper()-@item.Arr.ToUpper(),@item.FlightID,@item.RegisterNo,@item.Aircraft"><img src="/images/add.png" width="20" height="20" /></a>
+                            </div>
+                      </div>
+                     
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                            <div class="col">
+                                Day:
+                            </div>
+                            <div class="col">
+                                @item.FlightDate.ToShortDateString()
+                            </div>
+                    </div>
+                     <div class="row">
+                            <div class="col">
+                                Reg:
+                            </div>
+                            <div class="col">
+                                @item.RegisterNo.ToString()
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col">
+                                Flt.No:
+                            </div>
+                            <div class="col">
+                               @item.FltNo
+                            </div>
+                    </div>
+                     <div class="row">
+                            <div class="col">
+                                Aircraft:
+                            </div>
+                            <div class="col">
+                                @item.Aircraft.ToString()
+                            </div>
+                    </div>
+                     <div class="row">
+                            <div class="col">
+                                Type:
+                            </div>
+                            <div class="col">
+                                @item.FlightType.ToString()
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col">
+                                Route:
+                            </div>
+                            <div class="col">
+                                @item.Dep.ToString()- @item.Arr.ToString()
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col">
+                                STD:
+                            </div>
+                            <div class="col">
+                                @item.STD.ToString()
+                            </div>
+                    </div>
+                     <div class="row">
+                            <div class="col">
+                                ETD/ATD:
+                            </div>
+                            <div class="col">
+                                @item.ETD.ToString()/@item.ATD.ToString()
+                            </div>
+                    </div>
+                     <div class="row">
+                            <div class="col">
+                                STA:
+                            </div>
+                            <div class="col">
+                                @item.STA.ToString()
+                            </div>
+                    </div>
+                     <div class="row">
+                            <div class="col">
+                                ETA/ATA:
+                            </div>
+                            <div class="col">
+                                @item.ETA.ToString()/@item.ATA.ToString()
+                            </div>
+                    </div>
+                  </div>
+                  
+                   
+                </div>
+       
+    }              
+    
+
+    <script>
+        $(function () {
+            $("a.add").bind('touchstar click', function () {
+                
+                var obj = $(this).attr("data-bb");
+                if (obj != null) {
+                    return window.location.href ="/CR/ControlReportMobile/CreateReport?t_obj=" +  obj;
+                }
+                else {
+                    alertify.alert("Please select your report.");
+                }
+
+            });
+        });
+    </script>

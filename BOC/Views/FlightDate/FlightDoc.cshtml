@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewData["Title"] = "FlightDoc";
+    Layout = "~/Views/Shared/_DeskTop.cshtml";
+}
+@{
+    var date = @HttpContextAccessor.HttpContext.Session.GetString("Date");
+    var flightno ="QH" + @HttpContextAccessor.HttpContext.Session.GetString("FlightNo");
+    var routing= @HttpContextAccessor.HttpContext.Session.GetString("Routing");
+}
+
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@using BOC.Models;
+@model List<FlightDoc>;
+
+<style>
+    #box {
+        background-color: #006BB8;
+        width: 100%;
+        border-radius: 25px;
+        padding: 5px;
+        margin: 0px;
+    }
+
+    #div1 {
+        height: 30px;
+        width: 20%;
+        float: left;
+        color: #333;
+        font-family: Tahoma;
+    }
+
+    #div2 {
+        height: 30px;
+        width: 30%;
+        border: solid 1px #acd9f5;
+        float: left;
+        margin-bottom: 5px;
+        color: #333;
+        font-family: Tahoma;
+    }
+   
+
+    #div1, #div2 {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .inline {
+        display: inline-block;
+        margin: 2px;
+    }
+  
+</style>
+<script>
+    $(function () {
+        document.getElementById("doc").innerHTML = "No electricity!";
+    });
+</script>
+<div class="container" style="padding-top:10px;">
+  <div id="box"><h4 style="text-align:center;font-family:Tahoma;color:white;"> @flightno- @date (@routing) </h4></div>
+    @if (Model == null)
+    {
+             <p id="doc"></p>
+    }
+    else
+    {
+            foreach (var item in Model)
+            {
+         
+                <div class="card text-dark bg-light mb-3" style="max-width: 96%;margin-left:10px;">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                <b>Airport:</b>@item.Airport.ToString()
+                            </div>
+                            <div class="float-right">
+                                <b>@item.DocumentType.ToString()/@item.RouteType.ToString()</b>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">             
+                            <span style="white-space: pre-line">@item.Content.ToString()</span>
+                        </p>
+           
+                    </div>
+                    <div class="card-footer">
+                          <div class="row">
+                            <div class="col">
+                                <i style="font-size: small;">@item.UserUpdate.ToString()</i>
+                            </div>
+                             <div class="float-right">
+                                <i style="font-size: small;">@item.RecDate.ToString()</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+    }
+    
+
+</div>
+

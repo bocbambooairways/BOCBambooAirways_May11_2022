@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewData["Title"] = "CreateReport";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@{
+
+    var email = @HttpContextAccessor.HttpContext.Session.GetString("Email");
+    var date = System.DateTime.Today.ToString("yyyy-MM-dd");
+
+}
+
+
+
+
+ <style>
+   .glyphicon-calendar {
+    font-size: 15pt;
+}
+
+.input-group {
+    width: 180px;
+    margin-top: 30px;
+}
+
+</style>
+
+
+
+
+   @* <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css' media="screen" />*@
+
+     <link rel="stylesheet" href='~/css/controlreport/bootstrap.min.css' media="screen" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
+    <!-- Bootstrap DatePicker -->
+ @*   <link rel="stylesheet" href="~/css/controlreport/bootstrap-datepicker.css" type="text/css" />*@
+    <link rel="stylesheet" href="~/css/controlreport/CreateReport.css" type="text/css" />
+
+<h1 id="title">Tạo Báo Cáo/CreateReport</h1>
+<p id="note">
+    Note: <b>Thời gian sử dụng theo mốc GMT+7</b> /<br /> Usage time according to GMT+7
+</p>
+<div class="box">
+    <p id="note">
+        <b>Bạn đang tạo báo cáo cho chuyến bay<br />@ViewBag.FlightDate.ToString()/@ViewBag.FlightNo.ToString()/@ViewBag.Route.ToString(). Số đăng ký máy bay @ViewBag.Reg.ToString(). Số tàu bay @ViewBag.Aircraft.ToString().</b>
+    </p>
+    <p style="text-align:center;">------------------</p>
+    <p id="note">
+        You are creating a report for flight<br />@ViewBag.FlightDate.ToString()/@ViewBag.FlightNo.ToString()/@ViewBag.Route.ToString(). The aircraft registration number is @ViewBag.Reg.ToString(). The aircraft number is @ViewBag.Aircraft.ToString().
+    </p>
+    <div class="row" style="margin-left:10px;"><p id="required"><b>Người báo cáo</b>/ Reporter</p></div>
+    <div class="row" style="margin-left:10px;">
+        @* @Html.TextBoxFor(model => model.Reporter, new {  id = "reporter", @class = "form-control" })*@
+        <input type="text" id="email" style="width:260px;" value="@email"/>
+    </div>
+    <div class="row" style="margin-left:10px;margin-top:10px;"><p id="required"><b>Ngày báo cáo</b>/ Report date</p></div>
+    <div class="row" style="margin-left:10px;">
+        @* @Html.TextBoxFor(model => model.ReportDate, new {  id = "reporter", @class = "form-control" })*@
+         <input type="date" id="reportdate" style="width:260px;" value="@date"/>
+    </div>
+    <div class="row" style="margin-left:10px;margin-top:10px;"><p id="required"><b>LOẠI BÁO CÁO</b>/ REPORT TYPE</p></div>
+    <div class="row" style="margin-left:87px;">
+         <select id="reporttype"  name="reporttype" multiple>
+             @foreach (var item in ViewBag.ReportType)
+             {
+
+                    <option value="@item.ReportType_ID">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@item.Description.ToString()</option>
+
+               }
+         </select>
+    </div>
+    <div class="row" style="margin-left:10px;margin-top:10px;"><p id="required"><b>Mã sự cố </b>/ Incident code</p></div>
+    <div class="row" style="margin-left:10px;margin-top:10px;">
+        @* @Html.TextBoxFor(model => model.IncidentCode, new {  id = "reporter", @class = "form-control" })*@
+         <input type="text" id="incidentcode" style="width:260px;"/>
+    </div>
+    <div class="row" style="margin-left:10px;margin-top:10px;"><p id="required"><b>Mô tả sự cố</b>/ Description of the incident</p></div>
+    <br />
+    <div class="row" style="margin-left:10px;">
+        <textarea class="form-control" id="description" rows="4" placeholder="Mô tả sự cố / Description of the incident" maxlength="1000" style="margin-top:-20px;width:260px;"></textarea>
+    </div>
+    <div class="row" style="margin-left:10px;margin-top:10px;">
+         <p style="width:280px;"><b>CHI TIẾT VỀ SỰ VỤ / UY HIẾP AN TOÀN / THƯƠNG TẬT</b>/ INCIDENT/ HAZARD/ INJURY DETAIL</p>
+    </div>
+    <br />
+     <div class="row" style="margin-left:10px;margin-top:10px;margin-top:10px;"><p id="required"><b>Ngày xảy ra sự cố</b>/ Date of incident</p></div>
+     <div class="row" style="margin-left:10px;">
+           <div class="input-group datepicker">
+                                <input id="txtDate" type="text" class="form-control date-input" readonly="readonly" style="margin-top:-60px;width:210px;"/>
+                                <label class="input-group-btn" for="txtDate">
+                                    <span class="btn btn-default" style="margin-top:-60px;">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </label>
+            </div>
+     </div>
+     <div class="row" style="margin-left:10px;margin-top:10px;"><p id="required"><b>Nơi xảy ra sự cố</b>/ Location of incident</p></div>
+     <div class="row" style="margin-left:10px;margin-top:10px;">
+         <input type="text" id="txtlocation"  style="width:260px;"/>
+     </div>
+     <div class="row" style="margin-left:10px;margin-top:10px;width:280px;"><p id="required"><b>Thời gian xảy ra sự cố</b>/ Local Time of incident</p></div>
+     <div class="row" style="margin-left:10px;">
+         <input type="text" id="txtlocaltime" style="width:260px;"/>
+     </div>
+     <div class="row" style="margin-left:10px;margin-top:10px;width:280px;"><p id="required"><b>Bộ phận có liên quan đến sự cố</b>/ Division related to incident</p></div>
+     <div class="row" style="margin-left:87px;">
+          <select id="divisionrelated"  name="divisionrelated" multiple>
+              @foreach (var item in ViewBag.Division)
+              {
+
+                    <option value="@item.RpDivID">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@item.DivisionName.ToString()</option>
+
+               }
+
+         </select>
+     </div>
+     <div class="row" style="margin-left:10px;margin-top:10px;"><p id="required"><b>Giai đoạn bay</b> / Flight phase</p></div>
+     <div class="row" style="margin-left:87px;">
+          <select id="flightphase"  name="flightphase" multiple>
+              @foreach (var item in ViewBag.FlightStage)
+              {
+
+                    <option value="@item.FlightStage_ID.ToString()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@item.Description.ToString()</option>
+
+               }
+
+         </select>
+     </div>
+      <div class="row" style="margin-left:10px;margin-top:10px;"><p id="required"><b>NỘI DUNG BÁO CÁO</b>/ REPORT CONTENT</p></div>
+     <div class="row" style="margin-left:10px;">
+         <div class="box2">
+             <b>Mô tả sự cố (Vui lòng mô tả rõ ràng và ngắn gọn về sự cố). – LOẠI SỰ CỐ / VỊ TRÍ / CÁ NHÂN , ĐƠN VỊ LIÊN QUAN / THỜI GIAN / LÝ DO /
+CÁCH THỨC – có thể bổ sung thêm trang khác khi cần thiết.</b>/
+Description (Please give a clear and concise description of events). - WHAT / WHERE / WHO / WHEN / WHY / HOW - Additional pages can be added as necessary.
+            <br />
+            <textarea class="form-control" id="reportcontent" rows="4" placeholder="Mô tả sự cố" maxlength="1000" style="margin-top:4px;margin-left:10px;margin-bottom:10px;width:235px;"></textarea>
+         </div>
+         <div class="row" style="margin-left:10px;margin-top:10px;"><p><b>KIẾN NGHỊ</b>/ RECOMMENDATION</p></div>
+          <div class="row" style="margin-left:10px;">
+                <textarea class="form-control" id="description" rows="4" placeholder="Nhập kiến nghị những biện pháp nhằm đảm bảo An toàn/RECOMMENDATION (if any)" maxlength="1000" style="margin-top:4px;margin-left:10px;width:235px;"></textarea>
+          </div>
+          <div class="row" style="margin-left:10px;margin-top:10px;"><p id="required"><b>ĐÍNH KÈM</b>/ ATTACHMENTS</p></div>
+          <br />
+           <div class="row" style="margin-left:20px;" id="files">
+
+                                    <div class="row" style="margin-left: 20px;">
+                                        <label for="file-upload" class="custom-file-upload">
+                                            <img src="/images/attach.png" width="20" height="20" />&nbsp;&nbsp;Attach File
+                                        </label>
+                                        <input type="file" id="fileToUpload" multiple />
+                                    </div>
+
+                                    <div class="row" style="width:300px;">
+                                        <ul class="fileList" id="list">
+                                        </ul>
+                                    </div>
+            </div>
+             <div class="row" style="margin-left:10px;margin-top:10px;width: 280px;"><p><b>NỘI DUNG PHẢN HỒI</b>/ RESPONSE CONTENT</p></div>
+              <div class="row" style="margin-left:10px;">
+                    <textarea class="form-control" id="reportcontent" rows="4" placeholder="Admin gửi ý kiến phản hồi tại đây" maxlength="1000" style="margin-top:4px;margin-left:10px;width:235px;"></textarea>
+              </div>
+               <div class="row" style="margin-left:10px;margin-top:10px;">
+                  <button type="button" id="savedraft" class="btn btn-primary" style="width:200px;">Lưu Nháp/ Save Draft</button>
+                  <button type="button" id="sendreport" class="btn btn-success" style="width:200px;margin-top:5px;">Gửi Báo Cáo/ Send Report</button>
+              </div>
+
+               <br />
+               <br />
+     </div>
+</div>
+ <div id="loading-div-background" style="visibility:hidden;">
+                <div id="loading-div" class="ui-corner-all">
+                    <img style="height:80px;margin:30px;" src="/images/loading.gif" alt="Loading.." />
+                    <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
+                </div>
+  </div>
+<script src="~/js/controlreport/Mcreatereport.js"></script>
+@* <script type="text/javascript">
+       $(document).ready(function() {
+           document.getElementById("incidentcode").disabled = true;
+            $('#reporttype').multiSelect();
+            $('#divisionrelated').multiSelect();
+            $('#flightphase').multiSelect();
+           
+             $('.datepicker').click(
+                    function () {
+                             $('#txtDate').datepicker({
+                                format: "dd/mm/yyyy",
+                                orientation: 'bottom',
+                                autoclose:true
+                            });
+                    }
+                );
+         
+              //Dùng để open fileUpload
+                $('.custom-file-upload').bind('touchstart click', function () {
+                    $('#fileToUpload').click();
+                });
+         
+        });
+    </script>
+*@

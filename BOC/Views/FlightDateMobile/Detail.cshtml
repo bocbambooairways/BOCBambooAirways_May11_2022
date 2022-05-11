@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+@using Newtonsoft.Json;
+<style>
+      .box  {
+            box-sizing:border-box;
+            width:250px;
+            height:200px;
+            margin: 100px;
+            padding:30px;
+            border: 10px solid #64AF53;
+         }
+</style>
+<div class="box">
+     <div class="row">
+            <input type="button" class="btn btn-primary" width=120 id="detail" value="Flight Detail">
+     </div>
+     <br />
+      <div class="row">
+             <input type="button" class="btn btn-primary" width=120 id="doccument" value="Doccument">
+      </div>
+      <br />
+      <div class="row">
+             <input type="button" class="btn btn-primary" width=120 id="discussion" value="Discussion">
+    </div>   
+    
+</div>
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+      var FlightID = @Html.Raw(JsonConvert.SerializeObject(@ViewBag.FlightID));
+      var FlightNo= @Html.Raw(JsonConvert.SerializeObject(@ViewBag.FlightNo));
+      var Routing=@Html.Raw(JsonConvert.SerializeObject(@ViewBag.Routing));
+</script>
+
+<script>
+
+            $(function () {
+                $('#detail').click(function(){ 
+                    return window.location.href= "/FlightDateMobile/FlightOne?FlightID=" + FlightID;
+                });
+                  $('#doccument').click(function(){ 
+                    return window.location.href="/FlightDateMobile/FlightDoc?FlightID=" + FlightID +"&FlightNo=" + FlightNo +"&Routing=" +Routing;
+                });
+                  $('#discussion').click(function(){ 
+                    return window.location.href="/FlightDateMobile/Discussion?FlightID=" + FlightID;
+                });
+            });
+            
+</script>
+

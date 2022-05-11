@@ -1,0 +1,32 @@
+﻿
+@using Newtonsoft.Json;
+@using BOC.Models;
+@using BOC.Areas.BaggageMiss.Models;
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+
+@{
+
+    List<FileAttach_HS> _attachfileList = SessionHelper.GetObjectFromJson<List<FileAttach_HS>>(@HttpContextAccessor.HttpContext.Session, "AttachFileHSFound");
+
+
+}
+
+@if (_attachfileList != null)
+{
+    <ul id="file_dinhkem">
+        @foreach (var item in _attachfileList)
+        {
+            if (item.FileLoc_ID != 0)
+            {
+
+                <li>@item.FileName.ToString()&emsp;&emsp;<a class="viewFile" href="/data/@item.sysFileName" target="_blank" style="color:blue;">View</a>&emsp;<a class="removeFile" href="#" data-fileid="@item.sysFileName.ToString()" style="color:red;">Remove</a></li>
+            }
+
+        }
+    </ul>
+
+}
+
