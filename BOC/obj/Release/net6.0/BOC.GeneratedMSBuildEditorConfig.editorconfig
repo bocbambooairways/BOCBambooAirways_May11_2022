@@ -15,12 +15,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\BAV\Desktop\May 11 2022\BOCBambooAirways_May11_2022\BOC
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/BAV/Desktop/May 11 2022/BOCBambooAirways_May11_2022/BOC/Areas/B-DCS/Views/Flight/M_Comment - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQi1EQ1NcVmlld3NcRmxpZ2h0XE1fQ29tbWVudCAtIENvcHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/BAV/Desktop/May 11 2022/BOCBambooAirways_May11_2022/BOC/Areas/B-DCS/Views/Flight/M_Comment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQi1EQ1NcVmlld3NcRmxpZ2h0XE1fQ29tbWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/BAV/Desktop/May 11 2022/BOCBambooAirways_May11_2022/BOC/Areas/B-DCS/Views/Flight/M_Comment_Create_Modify.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQi1EQ1NcVmlld3NcRmxpZ2h0XE1fQ29tbWVudF9DcmVhdGVfTW9kaWZ5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/BAV/Desktop/May 11 2022/BOCBambooAirways_May11_2022/BOC/Areas/B-DCS/Views/Flight/M_FlightList - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQi1EQ1NcVmlld3NcRmxpZ2h0XE1fRmxpZ2h0TGlzdCAtIENvcHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/BAV/Desktop/May 11 2022/BOCBambooAirways_May11_2022/BOC/Areas/B-DCS/Views/Flight/M_FlightList.cshtml]
