@@ -1,0 +1,69 @@
+﻿    @{
+    ViewData["Title"] = "M_Index";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+     }
+                <div style="width:90%;
+                margin:auto;
+                background-color:#F0F0F0;
+                padding-top:20px;
+                padding-bottom:20px;
+                margin-top:100px;
+                margin-bottom:20px;
+                border-radius:20px">
+                <div style="display:flex;width:100%;margin-top:0px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center;">Flight Info</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center;padding-right:20px">
+                    <input type="text" id="" name="" class="form-control" placeholder ="Flight Info" value="@ViewBag.FlightInfo" readonly/>
+                    </div>
+                </div>
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">Passenger Info</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center;padding-right:20px">
+                     <input type="text" id="Airports" name="Airports" class="form-control" placeholder ="Passenger Info" value="@ViewBag.Pax_name" readonly/>
+                    </div>
+                </div>
+                 <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">
+                     <button style="width:90%;background-color:darkgreen;margin:auto" class="btn btn-danger">New SSR</button>
+                    </div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center;padding-right:20px">
+                     <button style="width:80%;background-color:darkgreen;margin:auto" class="btn btn-danger">Back Pax Info</button>
+                    </div>
+                </div>
+            </div>
+            @if(ViewBag.arr_ssr!=null)
+            {
+            @foreach(var item in (IEnumerable<string>)ViewBag.arr_ssr)
+            {
+              <div style="width:90%;
+                margin:auto;
+                background-color:#F0F0F0;
+                padding-top:20px;
+                padding-bottom:20px;
+                margin-top:20px;
+                margin-bottom:20px;
+                border-radius:20px">
+                <div style="display:flex;width:100%;margin-top:0px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center;">SSR Code</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center;padding-right:20px">
+                    <input type="text" id="" name="" class="form-control" placeholder ="SSR Code" value="@item" readonly/>
+                    </div>
+                </div>
+                <div style="display:flex;width:100%;margin-top:20px">
+                    <div style="flex:40%;background-color:#F0F0F0;text-align:center">Remark</div>
+                    <div style="flex:60%;background-color:#F0F0F0;text-align:center;padding-right:20px">
+                     <input type="text" id="" name="" class="form-control" placeholder ="Status" value="" readonly/>
+                    </div>
+                </div>
+                 <div style="display:flex;width:100%;margin-top:20px">
+                 <button style="width:40%;background-color:darkgreen;margin:auto;margin-left:50%" class="btn btn-danger">Edit</button>
+                </div>
+            </div>
+            }
+         }
+
+            
+
+
+            
+                
