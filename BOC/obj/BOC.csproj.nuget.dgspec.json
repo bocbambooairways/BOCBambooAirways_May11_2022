@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\BAV\\Downloads\\Convert to BOC_19APRIL2022\\Convert to BOC\\BOC\\BOC.csproj": {}
+    "C:\\Users\\BAV\\Desktop\\May 11 2022\\BOCBambooAirways_May11_2022\\BOC\\BOC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\BAV\\Downloads\\Convert to BOC_19APRIL2022\\Convert to BOC\\BOC\\BOC.csproj": {
+    "C:\\Users\\BAV\\Desktop\\May 11 2022\\BOCBambooAirways_May11_2022\\BOC\\BOC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BAV\\Downloads\\Convert to BOC_19APRIL2022\\Convert to BOC\\BOC\\BOC.csproj",
+        "projectUniqueName": "C:\\Users\\BAV\\Desktop\\May 11 2022\\BOCBambooAirways_May11_2022\\BOC\\BOC.csproj",
         "projectName": "BOC",
-        "projectPath": "C:\\Users\\BAV\\Downloads\\Convert to BOC_19APRIL2022\\Convert to BOC\\BOC\\BOC.csproj",
+        "projectPath": "C:\\Users\\BAV\\Desktop\\May 11 2022\\BOCBambooAirways_May11_2022\\BOC\\BOC.csproj",
         "packagesPath": "C:\\Users\\BAV\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BAV\\Downloads\\Convert to BOC_19APRIL2022\\Convert to BOC\\BOC\\obj\\",
+        "outputPath": "C:\\Users\\BAV\\Desktop\\May 11 2022\\BOCBambooAirways_May11_2022\\BOC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages",
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BAV\\Downloads\\Convert to BOC_19APRIL2022\\Convert to BOC\\NuGet.Config",
+          "C:\\Users\\BAV\\Desktop\\May 11 2022\\BOCBambooAirways_May11_2022\\NuGet.Config",
           "C:\\Users\\BAV\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
