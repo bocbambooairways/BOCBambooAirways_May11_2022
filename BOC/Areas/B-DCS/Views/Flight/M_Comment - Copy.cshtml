@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "M_FlightList";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+@using (Html.BeginForm("", "", FormMethod.Post)) {
+    <h4 style="text-align:center;margin-top:90px;color:blue">@ViewBag.Pax_name</h4>
+    <div style="display:flex;width:90%;margin-top:10px">
+        <div style="flex:40%;background-color:white;text-align:center">SEQ/Seat/ST</div>
+        <div style="flex:60%;background-color:white;text-align:center">
+           @ViewBag.SEQ_Seat_ST
+        </div>
+    </div>
+
+    <div style="display:flex;width:90%;margin-top:20px">
+        <div style="flex:40%;background-color:white;text-align:center;">PNR/Ticket</div>
+        <div style="flex:60%;background-color:white;text-align:center">
+           @ViewBag.PNR_Ticket
+        </div>
+    </div>
+
+
+    <div style="display:flex;width:90%;margin-top:20px">
+        <div style="flex:40%;background-color:white;text-align:center">Class/SSR</div>
+        <div style="flex:60%;background-color:white;text-align:center">
+            @ViewBag.Class_SSR
+        </div>
+    </div>
+
+    <div style="display:flex;width:90%;margin-top:20px">
+        <div style="flex:40%;background-color:white;text-align:center">Remark</div>
+        <div style="flex:60%;background-color:white;text-align:center">
+            @ViewBag.Remark
+        </div>
+    </div>
+
+    @if (ViewBag.NewComment == "New")
+    {
+        <div style="display:flex;width:90%;margin-top:20px">
+            <div style="flex:40%;background-color:white;text-align:center">Comment</div>
+            <div style="flex:60%;background-color:white;text-align:center">
+
+            </div>
+        </div>
+
+
+
+        <div style="display:flex;width:90%;margin-top:10px;margin-bottom:10px; margin-left:10%">
+            <textarea style="flex:80%;background-color:white;text-align:center;border-radius:5px" class="form-control" rows="5" id="" name="comment_reply" placeholder="Typing your comment"></textarea>
+            <div style="flex:20%;background-color:white;text-align:center">
+                <button style="width:80%;background-color:darkgreen" class="btn btn-danger">Edit</button>
+            </div>
+        </div>
+    }
+    <div style="display:flex;width:90%;margin-top:20px;margin-left:auto;margin-right:auto">
+    <div style="flex:50%;background-color:white;text-align:center;padding:10px">
+    <a href="/B-DCS/Flight/M_SeatMap?Pax_name=cbd049f221af82804c5a2826809337c9b_@ViewBag.Pax_name&_Action=cbd049f221af82804c5a2826809337c9b_Reservation Seat&SEQ_Seat_ST=cbd049f221af82804c5a2826809337c9b_@ViewBag.SEQ_Seat_ST" style="width:100%;background-color:darkgreen" class="btn btn-danger" >Reservation Seat</a>
+    </div>
+    <div style="flex:50%;background-color:white;text-align:center;padding:10px">
+    <a href="/B-DCS/Flight/M_SeatMap?Pax_name=cbd049f221af82804c5a2826809337c9b_@ViewBag.Pax_name&_Action=cbd049f221af82804c5a2826809337c9b_Checkin&SEQ_Seat_ST=cbd049f221af82804c5a2826809337c9b_@ViewBag.SEQ_Seat_ST" style="width:100%;background-color:darkgreen" class="btn btn-danger">Checkin</a>
+   </div>
+    </div>
+    <div style="display:flex;width:90%;margin-top:5px;margin:auto">
+    <div style="flex:50%;background-color:white;text-align:center;padding:10px">
+    <a href="" style="width:100%;background-color:darkgreen" class="btn btn-danger">Travel Document</a>
+    </div>
+    <div style="flex:50%;background-color:white;text-align:center;padding:10px">
+    <a  href="/B-DCS/Flight/M_Input_Baggage?Pax_name=bd049f221af82804c5a2826809337c9b_@ViewBag.Pax_name&ifly_Pax_ID=2b8fb0598f1cd90508cfa80300730f6b_@ViewBag.ifly_Pax_ID&SEQ_Seat_ST=613383dc30dc4c820f93e7475a2990ed_@ViewBag.SEQ_Seat_ST&PNR_Ticket=s1afd1443d4e9328517a62ab6b2936672_@ViewBag.PNR_Ticket&Class_SSR=4c2318b88e267bd3cf8abf9ff43aa97e_@ViewBag.Class_SSR" style="width:100%;background-color:darkgreen" class="btn btn-danger">Manual Baggage</a>
+   </div>
+    </div>
+   <div style="display:flex;width:90%;margin-top:5px;margin:auto">
+    <div style="flex:50%;background-color:white;text-align:center;padding:10px">
+    <a href="/B-DCS/Flight/M_SeatMap?Pax_name=cbd049f221af82804c5a2826809337c9b_@ViewBag.Pax_name&_Action=cbd049f221af82804c5a2826809337c9b_Change Seat&SEQ_Seat_ST=cbd049f221af82804c5a2826809337c9b_@ViewBag.SEQ_Seat_ST" style="width:100%;background-color:darkgreen" class="btn btn-danger">Change Seat</a>
+    </div>
+    <div style="flex:50%;background-color:white;text-align:center;padding:10px">
+    <a href="/B-DCS/Flight/M_Input_SSR?Class_SSR=12e95c254d1c532e0d55e765731d8f89_@ViewBag.Class_SSR&Pax_name=17uoEtuihi89Lsg4hdedT7PUhF4FNgBPD2F_@ViewBag.Pax_name" style="width:100%;background-color:darkgreen" class="btn btn-danger">Input SSR</a>
+   </div>
+    </div>
+      <div style="display:flex;width:90%;margin-top:5px;margin:auto">
+    <div style="flex:50%;background-color:white;text-align:center;padding:10px">
+    <a href="/B-DCS/Flight/M_Comment_Create_Modify?Pax_name=bd049f221af82804c5a2826809337c9b_@ViewBag.Pax_name&ifly_Pax_ID=2b8fb0598f1cd90508cfa80300730f6b_@ViewBag.ifly_Pax_ID&SEQ_Seat_ST=613383dc30dc4c820f93e7475a2990ed_@ViewBag.SEQ_Seat_ST&PNR_Ticket=s1afd1443d4e9328517a62ab6b2936672_@ViewBag.PNR_Ticket&Class_SSR=4c2318b88e267bd3cf8abf9ff43aa97e_@ViewBag.Class_SSR" style="width:100%;background-color:darkgreen" class="btn btn-danger">New comment</a>
+    </div>
+    <div style="flex:50%;background-color:white;text-align:center;padding:10px;padding-bottom:20px">
+    <a href="/B-DCS/Flight/M_OffLoad?Pax_name=bd049f221af82804c5a2826809337c9b_@ViewBag.Pax_name&ifly_Pax_ID=2b8fb0598f1cd90508cfa80300730f6b_@ViewBag.ifly_Pax_ID&SEQ_Seat_ST=613383dc30dc4c820f93e7475a2990ed_@ViewBag.SEQ_Seat_ST&PNR_Ticket=s1afd1443d4e9328517a62ab6b2936672_@ViewBag.PNR_Ticket&Class_SSR=4c2318b88e267bd3cf8abf9ff43aa97e_@ViewBag.Class_SSR"  style="width:100%;background-color:darkgreen" class="btn btn-danger">Offload</a>
+   </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+}

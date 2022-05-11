@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "M_FlightList";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+@using (Html.BeginForm("M_SearchList", "Flight", FormMethod.Post)) {
+    <div style="width:90%;
+                margin:auto;
+                background-color:white;padding-bottom:20px">
+ 
+  <table class="table table-condensed" style="margin-top:100px">
+    <thead>
+      <tr style="background-color:#F0F0F0">
+        <th>Airport</th>
+        <th>Time Zone</th>
+        <th>Airport Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach(var item in Model)
+                {
+                 <tr>
+                     <td>
+                         <a href="/B-DCS/Flight/M_Index?Airport=88c11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a_@item.Airport&FlightDate=85d11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586ad_@ViewBag.FlightDate" style="text-decoration:none">@item.Airport</a>
+                     </td>
+                      <td >
+                         <a href="/B-DCS/Flight/M_Index?Airport=8fc11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a_@item.Airport&FlightDate=85cd11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586ad_@ViewBag.FlightDate" style="text-decoration:none">@item.GMT</a>
+                     </td>
+                      <td>
+                         <a href="/B-DCS/Flight/M_Index?Airport=8ec11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586a_@item.Airport&FlightDate=8cdd11dbe0884a34c2a631f25c7b872e65a2ec2bb4adcb7df9af0678ba03cec69fb669586af_@ViewBag.FlightDate" style="text-decoration:none">@item.AirportName</a>
+                     </td>
+                 </tr>   
+                }
+    </tbody>
+  </table>
+      <a href="/B-DCS/Flight/M_Index?&FlightDate=4c2a631f25c7b872e65a2ec2bb4a8ec11dbe0884a3484a34c2a631f25c7b872ec_@ViewBag.FlightDate"  class="btn btn-danger" style="background-color:darkgreen;width:100px;margin-top:20px;margin-left:auto;margin-right:auto;display:block">Cancel</a>
+    </div>
+
+
+}
